@@ -1,0 +1,16 @@
+{
+  "name": "sequelize-aws-data-api-connector",
+  "description": "AWS Data API connector for Sequelize",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "sergiofilhow@gmail.com",
+  "dependencies": {
+    "aws-sdk": "^2.512.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0"
+  },
+  "peerDependencies": {
+    "sequelize": "^5.15.1"
+  }
+}
