@@ -111,7 +111,7 @@ function applyParams(sql, params) {
   return { sql: newSql, parameters };
 }
 
-export class DataApi {
+class DataApi {
   constructor({ resourceArn, secretArn, database, region }) {
     this.resourceArn = resourceArn;
     this.secretArn = secretArn;
@@ -167,7 +167,7 @@ export class DataApi {
 
 let id = 0;
 
-export class DataApiConnection {
+class DataApiConnection {
 
   constructor(dataAPI, verbose) {
     this.dataAPI = dataAPI;
@@ -223,3 +223,6 @@ export class DataApiConnection {
     return { setMaxListeners: () => {} };
   }
 }
+
+exports.DataApi = DataApi;
+exports.DataApiConnection = DataApiConnection;
