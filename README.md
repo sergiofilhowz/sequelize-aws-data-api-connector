@@ -5,7 +5,7 @@ You will need Sequelize
 
 ```
 $ yarn add sequelize
-$ yarn add sequelize-aws-data-api-connector --save
+$ yarn add sequelize-aws-data-api-connector
 ```
 
 ## Usage
