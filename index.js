@@ -1,4 +1,13 @@
 const { DataApiConnection, DataApi } = require('./data-api');
+const https = require('https');
+const AWS = require('aws-sdk');
+
+const sslAgent = new https.Agent({
+  keepAlive: true,
+  maxSockets: 50,
+  rejectUnauthorized: true
+});
+sslAgent.setMaxListeners(0);
 
 function extendFunction(object, property, subfunction) {
   const func = object[property];
@@ -11,6 +20,8 @@ function extendFunction(object, property, subfunction) {
 }
 
 function enableDataAPI(sequelize, { resourceArn, secretArn, database, region, verbose }) {
+  AWS.config.update({ httpOptions: { agent: sslAgent } });
+
   const dataAPI = new DataApi({ resourceArn, secretArn, database, region });
 
   extendFunction(sequelize.connectionManager, 'connect', async () => new DataApiConnection(dataAPI, verbose));
