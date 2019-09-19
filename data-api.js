@@ -10,23 +10,26 @@ const includeResultMetadata = true;
  */
 
 const parserDictionary = {
-  BIT: column => column.booleanValue,
-  BOOLEAN: column => column.booleanValue,
+  BIT: column => column.isNull ? null : column.booleanValue,
+  BOOLEAN: column => column.isNull ? null : column.booleanValue,
 
-  VARCHAR: column => column.stringValue,
-  DATETIME: column => moment.utc(column.stringValue).toDate().toISOString(),
-  TEXT: column => column.stringValue,
+  VARCHAR: column => column.isNull ? null : column.stringValue,
+  DATETIME: column => column.isNull ? null : moment.utc(column.stringValue).toDate().toISOString(),
+  TEXT: column => column.isNull ? null : column.stringValue,
 
-  BIGINT: column => column.longValue,
-  INT: column => column.longValue,
-  TINYINT: column => column.longValue,
-  SMALLINT: column => column.longValue,
-  INTEGER: column => column.longValue,
-  DECIMAL: column => column.longValue || column.doubleValue,
+  BIGINT: column => column.isNull ? null : column.longValue,
+  INT: column => column.isNull ? null : column.longValue,
+  TINYINT: column => column.isNull ? null : column.longValue,
+  SMALLINT: column => column.isNull ? null : column.longValue,
+  INTEGER: column => column.isNull ? null : column.longValue,
+  DECIMAL: column => {
+    if (column.isNull) return null;
+    return column.longValue !== undefined ? column.longValue : column.doubleValue;
+  },
 
-  FLOAT: column => column.doubleValue,
-  REAL: column => column.doubleValue,
-  DOUBLE: column => column.doubleValue,
+  FLOAT: column => column.isNull ? null : column.doubleValue,
+  REAL: column => column.isNull ? null : column.doubleValue,
+  DOUBLE: column => column.isNull ? null : column.doubleValue,
 };
 const defaultParser = column => column.stringValue;
 
