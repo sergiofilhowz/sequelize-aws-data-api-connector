@@ -76,12 +76,7 @@ const parseResult = data => {
   return records.map(parser);
 };
 
-const paramNames = [
-  'first', 'second', 'third', 'forth', 'fifth', 'sixth', 'seventh',
-  'eighth', 'nineth', 'tenth', 'eleventh', 'twelveth', 'thirteenth',
-  'fourteenth', 'fifteenth', 'sixteenth', 'eleventeenth', 'eighteenth',
-  'nineteenth', 'twentyth'
-];
+const paramsPrefix = 'parameter'
 
 function getValueFromParam(param) {
   if (param === null || param === undefined) {
@@ -102,7 +97,7 @@ function applyParams(sql, params) {
   let index = 0;
   const parameters = [];
   const newSql = sql.replace(/\?/g, function () {
-    const paramName = paramNames[index];
+    const paramName = `${paramsPrefix}_${index}`;
     parameters.push({
       name: paramName,
       value: getValueFromParam(params[index])
