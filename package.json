@@ -1,7 +1,7 @@
 {
   "name": "sequelize-aws-data-api-connector",
   "description": "AWS Data API connector for Sequelize",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "index.js",
   "license": "MIT",
   "author": "sergiofilhow@gmail.com",
